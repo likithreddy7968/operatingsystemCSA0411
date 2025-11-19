@@ -1,0 +1,74 @@
+EXPERIMENTT 16
+
+#include <stdio.h>
+
+int main() {
+    int blocks, processes, i, j;
+
+    printf("Enter number of memory blocks: ");
+    scanf("%d", &blocks);
+
+    int blockSize[20];
+    printf("Enter size of each block:\n");
+    for (i = 0; i < blocks; i++)
+        scanf("%d", &blockSize[i]);
+
+    printf("Enter number of processes: ");
+    scanf("%d", &processes);
+
+    int processSize[20], allocation[20];
+    printf("Enter size of each process:\n");
+    for (i = 0; i < processes; i++)
+        scanf("%d", &processSize[i]);
+
+    // initialize allocation array
+    for (i = 0; i < processes; i++)
+        allocation[i] = -1;
+
+    // First Fit Allocation
+    for (i = 0; i < processes; i++) {
+        for (j = 0; j < blocks; j++) {
+            if (blockSize[j] >= processSize[i]) {
+                // allocate block j to process i
+                allocation[i] = j;
+                blockSize[j] -= processSize[i];  // reduce block size
+                break;
+            }
+        }
+    }
+
+    // Output
+    printf("\nProcess No\tProcess Size\tBlock Allocated\n");
+    for (i = 0; i < processes; i++) {
+        printf("%d\t\t%d\t\t", i + 1, processSize[i]);
+        
+        if (allocation[i] != -1)
+            printf("%d\n", allocation[i] + 1);
+        else
+            printf("Not Allocated\n");
+    }
+
+    return 0;
+}
+
+INPUT 
+
+Enter number of memory blocks: 5
+Enter size of each block:
+100
+500 200 300 600
+
+Enter number of processes: 4
+Enter size of each process:
+2123
+417
+112
+426
+
+OUTPUT
+
+Process No	Process Size	Block Allocated
+1		2123		Not Allocated
+2		417		2
+3		112		3
+4		426		5

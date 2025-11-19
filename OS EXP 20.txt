@@ -1,0 +1,615 @@
+EXPERIMENT 20
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    int i, j, choice, userCount = 0;
+    char dirName[10][20];         // User directories
+    char fileName[10][10][20];    // Files inside directories
+    int fileCount[10] = {0};      // Number of files per directory
+
+    while (1) {
+        printf("\n--- TWO LEVEL DIRECTORY STRUCTURE ---\n");
+        printf("1. Create Directory\n");
+        printf("2. Create File\n");
+        printf("3. Delete File\n");
+        printf("4. Display Directory Structure\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+
+            case 1: // Create Directory
+                printf("Enter new directory name: ");
+                scanf("%s", dirName[userCount]);
+                userCount++;
+                printf("Directory created successfully.\n");
+                break;
+
+            case 2: { // Create File
+                char dname[20], fname[20];
+                printf("Enter directory name: ");
+                scanf("%s", dname);
+
+                // find directory
+                for (i = 0; i < userCount; i++) {
+                    if (strcmp(dname, dirName[i]) == 0) {
+                        printf("Enter file name: ");
+                        scanf("%s", fname);
+
+                        // store file
+                        strcpy(fileName[i][fileCount[i]], fname);
+                        fileCount[i]++;
+
+                        printf("File created.\n");
+                        goto endCreate;
+                    }
+                }
+                printf("Directory not found!\n");
+            endCreate:
+                break;
+            }
+
+            case 3: { // Delete File
+                char dname[20], fname[20];
+                printf("Enter directory name: ");
+                scanf("%s", dname);
+
+                for (i = 0; i < userCount; i++) {
+                    if (strcmp(dname, dirName[i]) == 0) {
+                        printf("Enter file name to delete: ");
+                        scanf("%s", fname);
+
+                        for (j = 0; j < fileCount[i]; j++) {
+                            if (strcmp(fname, fileName[i][j]) == 0) {
+                                strcpy(fileName[i][j], fileName[i][fileCount[i]-1]);
+                                fileCount[i]--;
+                                printf("File deleted.\n");
+                                goto endDelete;
+                            }
+                        }
+                        printf("File not found.\n");
+                        goto endDelete;
+                    }
+                }
+                printf("Directory not found.\n");
+            endDelete:
+                break;
+            }
+
+            case 4: // Display
+                if (userCount == 0) {
+                    printf("No directories created.\n");
+                } else {
+                    printf("\nDirectory Structure:\n");
+                    for (i = 0; i < userCount; i++) {
+                        printf("\nDirectory: %s\n", dirName[i]);
+                        if (fileCount[i] == 0) {
+                            printf("  No files.\n");
+                        } else {
+                            printf("  Files:\n");
+                            for (j = 0; j < fileCount[i]; j++) {
+                                printf("    %s\n", fileName[i][j]);
+                            }
+                        }
+                    }
+                }
+                break;
+
+            case 5:
+                return 0;
+
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+}
+
+INPUT AND OUTPUT
+
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: create
+Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit
+Enter your choice: Invalid choice!
+
+--- TWO LEVEL DIRECTORY STRUCTURE ---
+1. Create Directory
+2. Create File
+3. Delete File
+4. Display Directory Structure
+5. Exit

@@ -1,0 +1,112 @@
+EXPERIMENT 18
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n, head, i, j, size, direction;
+    int request[50], left[50], right[50];
+    int l = 0, r = 0, total = 0;
+
+    printf("Enter number of disk requests: ");
+    scanf("%d", &n);
+
+    printf("Enter the request sequence:\n");
+    for (i = 0; i < n; i++)
+        scanf("%d", &request[i]);
+
+    printf("Enter initial head position: ");
+    scanf("%d", &head);
+
+    printf("Enter total disk size: ");
+    scanf("%d", &size);
+
+    printf("Enter head movement direction (0 = left, 1 = right): ");
+    scanf("%d", &direction);
+
+    // Divide requests based on head position
+    for (i = 0; i < n; i++) {
+        if (request[i] < head)
+            left[l++] = request[i];
+        else
+            right[r++] = request[i];
+    }
+
+    // Sort left[] descending, right[] ascending
+    for (i = 0; i < l - 1; i++)
+        for (j = i + 1; j < l; j++)
+            if (left[i] < left[j]) {
+                int temp = left[i];
+                left[i] = left[j];
+                left[j] = temp;
+            }
+
+    for (i = 0; i < r - 1; i++)
+        for (j = i + 1; j < r; j++)
+            if (right[i] > right[j]) {
+                int temp = right[i];
+                right[i] = right[j];
+                right[j] = temp;
+            }
+
+    // SCAN Movement
+    printf("\nSCAN Order of servicing:\n");
+
+    int current = head;
+
+    if (direction == 1) { // move right first
+        for (i = 0; i < r; i++) {
+            printf("%d -> ", right[i]);
+            total += abs(current - right[i]);
+            current = right[i];
+        }
+
+        // go to last track (size-1)
+        total += abs(current - (size - 1));
+        current = size - 1;
+
+        // now move left
+        for (i = 0; i < l; i++) {
+            printf("%d -> ", left[i]);
+            total += abs(current - left[i]);
+            current = left[i];
+        }
+    } else { // move left first
+        for (i = 0; i < l; i++) {
+            printf("%d -> ", left[i]);
+            total += abs(current - left[i]);
+            current = left[i];
+        }
+
+        // go to track 0
+        total += abs(current - 0);
+        current = 0;
+
+        // now move right
+        for (i = 0; i < r; i++) {
+            printf("%d -> ", right[i]);
+            total += abs(current - right[i]);
+            current = right[i];
+        }
+    }
+
+    printf("\n\nTotal Head Movement = %d\n", total);
+
+    return 0;
+}
+
+INPUT 
+
+Enter number of disk requests: 8
+Enter the request sequence:
+98 183 37 122 14 124 65 67
+Enter initial head position: 199
+Enter total disk size: 199
+Enter head movement direction (0 = left, 1 = right): 1
+
+OUTPUT
+
+SCAN Order of servicing:
+183 -> 124 -> 122 -> 98 -> 67 -> 65 -> 37 -> 14 -> 
+
+Total Head Movement = 185

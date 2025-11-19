@@ -1,0 +1,119 @@
+EXPERIMENT 14 
+
+#include <stdio.h>
+
+int main() {
+    int pages[50], frames[10];
+    int n, f, i, j, k;
+    int page_faults = 0;
+
+    printf("Enter number of pages: ");
+    scanf("%d", &n);
+
+    printf("Enter the page reference string:\n");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &pages[i]);
+    }
+
+    printf("Enter number of frames: ");
+    scanf("%d", &f);
+
+    // Initialize all frames as empty
+    for (i = 0; i < f; i++) {
+        frames[i] = -1;
+    }
+
+    printf("\nOPTIMAL PAGE REPLACEMENT:\n");
+
+    for (i = 0; i < n; i++) {
+        int page = pages[i];
+        int found = 0;
+
+        // Check if page is already in frames (HIT)
+        for (j = 0; j < f; j++) {
+            if (frames[j] == page) {
+                found = 1;
+                break;
+            }
+        }
+
+        // If NOT FOUND → PAGE FAULT
+        if (!found) {
+            int empty = -1;
+
+            // Check for empty frame first
+            for (j = 0; j < f; j++) {
+                if (frames[j] == -1) {
+                    empty = j;
+                    break;
+                }
+            }
+
+            if (empty != -1) {
+                // Empty frame found → insert page
+                frames[empty] = page;
+            } else {
+                // Optimal replacement logic
+                int farthest = -1;
+                int pos = -1;
+
+                for (j = 0; j < f; j++) {
+                    int next_use = -1;
+                    for (k = i + 1; k < n; k++) {
+                        if (frames[j] == pages[k]) {
+                            next_use = k;
+                            break;
+                        }
+                    }
+
+                    if (next_use == -1) {
+                        pos = j;      // Page never used again
+                        break;
+                    }
+
+                    if (next_use > farthest) {
+                        farthest = next_use;
+                        pos = j;
+                    }
+                }
+
+                frames[pos] = page;
+            }
+
+            page_faults++;
+        }
+
+        // Print frame state
+        printf("After inserting %d: ", page);
+        for (j = 0; j < f; j++) {
+            printf("%d ", frames[j]);
+        }
+        printf("\n");
+    }
+
+    printf("\nTotal Page Faults = %d\n", page_faults);
+
+    return 0;
+}
+
+INPUT 
+
+Enter number of pages: 9
+Enter the page reference string:
+7 0 1 2 0 3 4 2 3 
+Enter number of frames: 3
+
+OUTPUT
+
+OPTIMAL PAGE REPLACEMENT:
+After inserting 7: 7 -1 -1 
+After inserting 0: 7 0 -1 
+After inserting 1: 7 0 1 
+After inserting 2: 2 0 1 
+After inserting 0: 2 0 1 
+After inserting 3: 2 3 1 
+After inserting 4: 2 3 4 
+After inserting 2: 2 3 4 
+After inserting 3: 2 3 4 
+
+Total Page Faults = 6

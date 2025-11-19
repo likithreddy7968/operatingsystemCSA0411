@@ -1,0 +1,88 @@
+EXPERIMENT 13
+
+#include <stdio.h>
+
+int main() {
+    int pages[50], frames[10], recent[10];
+    int n, f, i, j, page_faults = 0;
+    int least, pos;
+
+    printf("Enter number of pages: ");
+    scanf("%d", &n);
+
+    printf("Enter the page reference string:\n");
+    for (i = 0; i < n; i++)
+        scanf("%d", &pages[i]);
+
+    printf("Enter number of frames: ");
+    scanf("%d", &f);
+
+    // Initialize frames to -1 (empty)
+    for (i = 0; i < f; i++) {
+        frames[i] = -1;
+        recent[i] = 0;
+    }
+
+    printf("\nLRU Page Replacement:\n");
+
+    for (i = 0; i < n; i++) {
+        int page = pages[i];
+        int found = 0;
+
+        // Check if page exists in frame (HIT)
+        for (j = 0; j < f; j++) {
+            if (frames[j] == page) {
+                found = 1;
+                recent[j] = i;   // Update last used time
+                break;
+            }
+        }
+
+        // If page not found → page fault
+        if (!found) {
+            // Find least recently used frame
+            least = recent[0];
+            pos = 0;
+            for (j = 1; j < f; j++) {
+                if (recent[j] < least) {
+                    least = recent[j];
+                    pos = j;
+                }
+            }
+
+            frames[pos] = page;
+            recent[pos] = i;
+            page_faults++;
+        }
+
+        // Print current frame status
+        printf("After inserting %d: ", page);
+        for (j = 0; j < f; j++)
+            printf("%d ", frames[j]);
+        printf("\n");
+    }
+
+    printf("\nTotal Page Faults = %d\n", page_faults);
+
+    return 0;
+}
+
+INPUT 
+
+Enter number of pages: 7
+Enter the page reference string:
+7 0 1 2 0 3 0
+Enter number of frames: 3
+
+OUTPUT
+
+LRU Page Replacement:
+After inserting 7: 7 -1 -1 
+After inserting 0: 0 -1 -1 
+After inserting 1: 0 1 -1 
+After inserting 2: 0 1 2 
+After inserting 0: 0 1 2 
+After inserting 3: 0 3 2 
+After inserting 0: 0 3 2 
+
+Total Page Faults = 5
